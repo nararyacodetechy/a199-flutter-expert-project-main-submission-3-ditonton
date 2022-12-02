@@ -1,0 +1,47 @@
+{
+    "project_info": {
+      "project_number": "206110671703",
+      "firebase_url": "https://ditonton-tv-default-rtdb.asia-southeast1.firebasedatabase.app",
+      "project_id": "ditonton-tv",
+      "storage_bucket": "ditonton-tv.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:206110671703:android:490ef9ceb27257b6f93412",
+          "android_client_info": {
+            "package_name": "com.dicoding.ditonton"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "206110671703-00sk18p7vmc5b09jnlmi98amdcq69nve.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDU2rpOELhKjr7YS0KpAFIYZeulTw-q3YA"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "206110671703-00sk18p7vmc5b09jnlmi98amdcq69nve.apps.googleusercontent.com",
+                "client_type": 3
+              },
+              {
+                "client_id": "206110671703-rhehh6gms93j0v123l00q69p6l55u42q.apps.googleusercontent.com",
+                "client_type": 2,
+                "ios_info": {
+                  "bundle_id": "com.ditontontv.app"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

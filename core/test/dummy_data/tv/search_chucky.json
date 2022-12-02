@@ -1,0 +1,27 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "backdrop_path": "/xAKMj134XHQVNHLC6rWsccLMenG.jpg",
+            "first_air_date": "2021-10-12",
+            "genre_ids": [
+                80,
+                10765
+            ],
+            "id": 90462,
+            "name": "Chucky",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Chucky",
+            "overview": "After a vintage Chucky doll turns up at a suburban yard sale, an idyllic American town is thrown into chaos as a series of horrifying murders begin to expose the towns hypocrisies and secrets. Meanwhile, the arrival of enemies and allies from Chuckys past threatens to expose the truth behind the killings, as well as the demon dolls untold origins.",
+            "popularity": 2380.124,
+            "poster_path": "/kY0BogCM8SkNJ0MNiHB3VTM86Tz.jpg",
+            "vote_average": 7.9,
+            "vote_count": 3437
+        }
+    ],
+    "total_pages": 1,
+    "total_results": 1
+}
