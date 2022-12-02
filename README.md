@@ -53,9 +53,9 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
 4. Tunggu proses testing selesai hingga muncul web terkait laporan coverage.
 
 Screenshoot Build CI 
-![image](https://user-images.githubusercontent.com/64852604/202751646-f4f747d1-a05b-44f7-b1da-24104039a90c.png)
+![image]()
 
-![image](https://user-images.githubusercontent.com/64852604/202839828-51d29a34-6463-4342-9052-67d2e0476248.png)
+![image]()
 
-![image](https://user-images.githubusercontent.com/64852604/202839843-9a70384b-98d6-4bc7-b45d-e5e4aa6882bf.png)
+![image]()
 
