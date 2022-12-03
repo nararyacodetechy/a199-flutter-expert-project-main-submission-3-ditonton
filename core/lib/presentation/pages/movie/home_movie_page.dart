@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search/search.dart';
 
 class HomeMoviePage extends StatefulWidget {
-  static const ROUTE_NAME = '/home-movie';
+  static const ROUTE_NAME = '/homepage-movie';
 
   const HomeMoviePage({super.key});
   @override
