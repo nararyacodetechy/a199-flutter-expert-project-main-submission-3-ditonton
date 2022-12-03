@@ -2,57 +2,191 @@
 
 # a199-flutter-expert-project-main-submission-3-ditonton
 
-Repository ini merupakan starter project submission kelas Flutter Expert Dicoding Indonesia.
-
 ---
 
-## Tips Submission Awal
+## Monitoring Analytivs Aplikasi
 
-Pastikan untuk memeriksa kembali seluruh hasil testing pada submissionmu sebelum dikirimkan. Karena kriteria pada submission ini akan diperiksa setelah seluruh berkas testing berhasil dijalankan.
+Sekarang kita akan belajar untuk mengintegrasikan proyek TV-Movie ditonton dengan Firebase dan memasang Crashlytics. Dengan mempelajari hal tersebut, kita bisa mendapatkan peringatan eror ketika aplikasi sudah dirilis ke pengguna nantinya. Sebelum memulai, Anda harus instal `Node.js` untuk memudahkan proses integrasi Firebase.
 
+## Membuat Firebase Project
 
-## Tips Submission Akhir
+Sebelum mengintegrasikan project Flutter dengan Firebase, ikuti langkah berikut untuk membuat project Firebase:
 
-Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.sh` pada repository ini. Berkas tersebut dapat mempermudah proses testing melalui *terminal* atau *command prompt*. Sebelumnya menjalankan berkas tersebut, ikuti beberapa langkah berikut:
-1. Install terlebih dahulu aplikasi sesuai dengan Operating System (OS) yang Anda gunakan.
-    - Bagi pengguna **Linux**, jalankan perintah berikut pada terminal.
-        ```
-        sudo apt-get update -qq -y
-        sudo apt-get install lcov -y
-        ```
-    
-    - Bagi pengguna **Mac**, jalankan perintah berikut pada terminal.
-        ```
-        brew install lcov
-        ```
-    - Bagi pengguna **Windows**, ikuti langkah berikut.
-        - Install [Chocolatey](https://chocolatey.org/install) pada komputermu.
-        - Setelah berhasil, install [lcov](https://community.chocolatey.org/packages/lcov) dengan menjalankan perintah berikut.
-            ```
-            choco install lcov
-            ```
-        - Kemudian cek **Environtment Variabel** pada kolom **System variabels** terdapat variabel GENTHTML dan LCOV_HOME. Jika tidak tersedia, Anda bisa menambahkan variabel baru dengan nilai seperti berikut.
-            | Variable | Value|
-            | ----------- | ----------- |
-            | GENTHTML | C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml |
-            | LCOV_HOME | C:\ProgramData\chocolatey\lib\lcov\tools |
+1. Masuk ke halaman Firebase console pada tautan [firebase](https://console.firebase.google.com/). Pastikan Anda telah memiliki akun Google dan Firebase.
+
+2. Kemudian buat project baru dengan klik Add project.
         
 2. Untuk mempermudah proses verifikasi testing, jalankan perintah berikut.
-    ```
-    git init
-    ```
-3. Kemudian jalankan berkas `test.sh` dengan perintah berikut pada *terminal* atau *powershell*.
-    ```
-    test.sh
-    ```
-    atau
-    ```
-    ./test.sh
-    ```
-    Proses ini akan men-*generate* berkas `lcov.info` dan folder `coverage` terkait dengan laporan coverage.
-4. Tunggu proses testing selesai hingga muncul web terkait laporan coverage.
+
+3. Pastikan opsi Enable Google Analytics terpilih. Ini bertujuan agar project dapat langsung terintegrasi dengan Google Analytics nantinya. Setelah itu klik Continue.
+
+## Konfigurasi Firebase
+
+1. Buka terminal pada direktori proyek Flutter, lalu instal **Firebase CLI**.
+   ```
+   npm install -g firebase-tools
+   ```
+2. Pastikan Anda login dengan akun Google yang sesuai dengan proyek Firebase sebelumnya.
+   ```
+   firebase login / firebase logout
+   ```
+
+3. Berikutnya lakukan install FlutterFire CLI pada terminal. Tambahkan sub-perintah globalagar Flutter CLI dapat bekerja di berbagai direktori proyek.
+Screenshoot Build CI 
+   ```
+   dart pub global activate flutterfire_cli
+   ```
+   
+4. Lakukan konfigurasi Firebase melalui command line.
+   ```
+   flutterfire configure
+   ```
+   **Notes:** Ini akan berfungsi jika telah meng-globalkan flutterfire_cli dan menambahkan path yang direcomendasikan ke Environment Variable Path.
+   
+## Konfigurasi Android
+
+1. konfigurasi tersebut pada berkas `build.gradle` pada folder `android/app`.
+   ```
+   android {
+        defaultConfig {
+            // ...
+            minSdkVersion 19
+            multiDexEnabled true
+            }
+        }
+   ```
+   
+2. Pada berkas build.gradle di folder `android`, tambahkan aturan untuk menyertakan `plugin Google Services`.
+   ```
+   buildscript {
+      repositories {
+        // Periksa apakah sudah menyertakan Maven Google atau tidak.
+        google()  // Google's Maven repository
+      }
+      dependencies {
+        // ...
+        // Tambahkan baris di bawah ini.
+        classpath 'com.google.gms:google-services:4.3.13'  // Google Services plugin
+      }
+    }
+    allprojects {
+      // ...
+      repositories {
+        // Periksa apakah sudah menyertakan Maven Google atau tidak.
+        google()  // Google's Maven repository
+        // ...
+      }
+    }
+   ```
+   
+3. Selanjutnya, buka berkas build.gradle di dalam folder `android/app`. Tambahkan kode di bawah ini untuk menerapkan plugin Google Services.
+   ```
+   apply plugin: 'com.android.application'
+    // Tambahkan baris di bawah ini.
+    apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+
+    android {
+      // ...
+    }
+   ```
+   
+## Konfigurasi IOS
+
+1. Anda harus instal dependency melalui `CocoaPods`. Jika pada folder ios tidak tersedia berkas `Podfile`, silakan jalankan perintah berikut untuk membuatnya. Pastikan Anda masuk ke direktori `/ios` terlebih dahulu dengan menggunakan perintah cd ios pada terminal Android Studio/VS Code/Intellij IDEA.
+   ```
+   pod init
+   ```
+   dan Install depedency
+   ```
+   pod install
+   ```
+   
+2. Untuk menghubungkan Firebase saat aplikasi mulai dijalankan, tambahkan kode inisialisasi di bawah ke class AppDelegate pada folder `ios/Runner/Appdegelete.swift`.
+
+   ```
+   import UIKit
+        import Flutter
+        import FirebaseCore
+
+        @UIApplicationMain
+        @objc class AppDelegate: FlutterAppDelegate {
+          override func application(
+            _ application: UIApplication,
+            didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+          ) -> Bool {
+            FirebaseApp.configure()
+            GeneratedPluginRegistrant.register(with: self)
+            return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+          }
+        }
+   ```
+
+## Integrasi Proyek Flutter
+
+1. Tambahkan package [firebase_core](https://pub.dev/packages/firebase_core) pada berkas pubspec.yaml.
+   ```
+   dependencies:
+        firebase_core: <latest-versions>
+   ```
+   
+2. Tambahkan kode inisialisasi Firebase di fungsi `main()` pada berkas `main.dart`.
+   ```
+   void main() async {  
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      runApp(const MyApp());
+   }
+   ```
+   
+## Menambahkan Crashlytics
+
+1. Tambahkan package [firebase_crashlytics](https://pub.dev/packages/firebase_crashlytics) pada berkas `pubspec.yaml`.
+
+   ```
+   dependencies:
+        firebase_crashlytics: <latest-versions>
+   ```
+
+2. Kemudian integrasikan untuk masing-masing platform. Untuk android, tambahkan dependency berikut pada berkas `android/build.gradle`.
+   ```
+   dependencies {
+        … 
+        classpath 'com.google.gms:google-services:4.3.13'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.1'
+   }
+   ```
+
+3. Lalu, pada android/app/build.gradle seperti berikut:
+   ```
+   apply plugin: 'com.google.gms.google-services'
+   apply plugin: 'com.google.firebase.crashlytics'
+   ```
+   
+4. Kemudian untuk platform `iOS`, khususnya bagi perangkat `iOS 14` ke atas, Anda perlu kustomisasi berkas `Info.plist` yang ada di direktori `ios/Runner`.
+   ```
+   <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        ...
+        <key>NSBonjourServices</key>
+        <array>
+            <string>_dartobservatory._tcp</string>
+        </array>
+    </dict>
+    </plist>
+   ```
+   **Notes:** Sebagai catatan, penambahan ini dikhususkan untuk aplikasi versi Debug. Apabila ingin mengembangkan aplikasi lebih lanjut, Anda bisa mengunjungi laman dokumentasi terkait Local Network Privacy Permissions.
+   
+5. Lalu, buka firebase console ke `menu Crashlytics`. Klik `Enable Crashlytics` untuk mengaktifkannya.
+
+
+
 
 Screenshoot Build CI 
+
 ![image]()
 
 ![image]()
