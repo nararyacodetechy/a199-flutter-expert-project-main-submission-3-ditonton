@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -45,17 +48,6 @@ class DefaultFirebaseOptions {
         );
     }
   }
-
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAOxKTnTA0BvGXcfkdQENHca_uPQIWA6kQ',
-    appId: '1:463754159915:web:24765611eade03a3bec76e',
-    messagingSenderId: '463754159915',
-    projectId: 'apps-movie-tv-ditonton',
-    authDomain: 'apps-movie-tv-ditonton.firebaseapp.com',
-    databaseURL: 'https://apps-movie-tv-ditonton-default-rtdb.firebaseio.com',
-    storageBucket: 'apps-movie-tv-ditonton.appspot.com',
-    measurementId: 'G-YKD49XZYKJ',
-  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDpzDgJ7iHw-BXHeNLQbW-V7McJyfwUiOo',
