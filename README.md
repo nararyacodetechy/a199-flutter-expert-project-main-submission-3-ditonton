@@ -4,7 +4,7 @@
 
 ---
 
-## Monitoring Analytivs Aplikasi
+## Monitoring Analytics Aplikasi
 
 Sekarang kita akan belajar untuk mengintegrasikan proyek TV-Movie ditonton dengan Firebase dan memasang Crashlytics. Dengan mempelajari hal tersebut, kita bisa mendapatkan peringatan eror ketika aplikasi sudah dirilis ke pengguna nantinya. Sebelum memulai, Anda harus instal `Node.js` untuk memudahkan proses integrasi Firebase.
 
@@ -12,7 +12,7 @@ Sekarang kita akan belajar untuk mengintegrasikan proyek TV-Movie ditonton denga
 
 Sebelum mengintegrasikan project Flutter dengan Firebase, ikuti langkah berikut untuk membuat project Firebase:
 
-1. Masuk ke halaman Firebase console pada tautan [firebase](https://console.firebase.google.com/). Pastikan Anda telah memiliki akun Google dan Firebase.
+1. Masuk ke halaman Firebase console pada tautan [console.firebase.google.com](https://console.firebase.google.com/). Pastikan Anda telah memiliki akun Google dan Firebase.
 
 2. Kemudian buat project baru dengan klik Add project.
         
@@ -182,14 +182,30 @@ Screenshoot Build CI
    
 5. Lalu, buka firebase console ke `menu Crashlytics`. Klik `Enable Crashlytics` untuk mengaktifkannya.
 
+7. Jalankan Aplikasi dan coba tambahkan Crash Button untuk melihat apakah firebase crashlytics berhasil ditampilkan di web firebase
+   contoh crash button search:
+   ```
+   IconButton(
+          onPressed: () {
+            FirebaseCrashlytics.instance.crash();
+            Navigator.pushNamed(context, SEARCH_ROUTE);
+          },
+          icon: Icon(Icons.search),
+        )
+   ```
+
 
 
 
 Screenshoot Build CI 
 
-![image]()
+Continuous Integration
+![image](https://drive.google.com/file/d/1NuZoGDQrcAXQvQOYZCB3jGqhCwVgvKZA/view?usp=sharing)
 
-![image]()
+Firebase Analytics
+![image](https://drive.google.com/file/d/1jmDf8lAdp-IBB8IxMhp8xckXFXHHeqNU/view?usp=sharing)
+![image](https://drive.google.com/file/d/1WXHJL3hFW104dXEsdlFxb-Mnq6zrdHC7/view?usp=sharing)
 
-![image]()
+Firebase Crashlytics
+![image](https://drive.google.com/file/d/1hi2cslGjn7-M8YRI9lKaMbBObXLeyMRW/view?usp=sharing)
 
