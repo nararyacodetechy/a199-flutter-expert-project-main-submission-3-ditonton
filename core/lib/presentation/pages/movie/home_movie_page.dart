@@ -82,19 +82,19 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         title: const Text('Movie Series'),
         actions: [
           // Test Crash
-          IconButton(
-            onPressed: () {
-              FirebaseCrashlytics.instance.crash();
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
-            },
-            icon: const Icon(Icons.search),
-          ),
           // IconButton(
           //   onPressed: () {
+          //     FirebaseCrashlytics.instance.crash();
           //     Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
           //   },
           //   icon: const Icon(Icons.search),
-          // )
+          // ),
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+            },
+            icon: const Icon(Icons.search),
+          )
         ],
       ),
       body: Padding(
