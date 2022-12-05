@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:about/about.dart';
+import 'package:core/presentation/pages/movie/now_playing_page.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,9 +104,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'Now Playing',
+                onTap: () =>
+                    Navigator.pushNamed(context, NowPlayingPage.ROUTE_NAME),
               ),
               BlocBuilder<NowPlayingMoviesBloc, MovieState>(
                   builder: (context, state) {

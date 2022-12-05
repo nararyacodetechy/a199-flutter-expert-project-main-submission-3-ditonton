@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:about/about.dart';
 import 'package:core/core.dart';
+import 'package:core/presentation/pages/tv/airing_today_page.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,29 +43,29 @@ class _HomeTvPageState extends State<HomeTvPage> {
               accountEmail: Text('ditonton@dicoding.com'),
             ),
             ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies Series'),
+              leading: const Icon(Icons.movie),
+              title: const Text('Movies Series'),
               onTap: () {
                 Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME);
               },
             ),
             ListTile(
-              leading: Icon(Icons.live_tv),
-              title: Text('Tv Series'),
+              leading: const Icon(Icons.live_tv),
+              title: const Text('Tv Series'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist Movie'),
+              leading: const Icon(Icons.save_alt),
+              title: const Text('Watchlist Movie'),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
               },
             ),
             ListTile(
-              leading: Icon(Icons.system_update_alt),
-              title: Text('Watchlist TV'),
+              leading: const Icon(Icons.system_update_alt),
+              title: const Text('Watchlist TV'),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistTvsPage.ROUTE_NAME);
               },
@@ -104,9 +105,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Airing Today',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'Airing Today',
+                onTap: () =>
+                    Navigator.pushNamed(context, AiringTodayPage.ROUTE_NAME),
               ),
               BlocBuilder<AiringTodayTvsBloc, TvState>(
                   builder: (context, state) {
